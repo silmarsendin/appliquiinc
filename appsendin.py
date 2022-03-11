@@ -1,3 +1,4 @@
+from tkinter import ANCHOR
 import streamlit as st
 #st.title('Aplicativo para Seleção das Proteções Contra Incêndio para Líquidos Igníferos')
 #st.write('De acordo com a Instrução Técnica 25/19 do Corpo de Bombeiros do Estado de São Paulo e NBR 17.505.')
@@ -8,8 +9,9 @@ st.image(image1, caption='')
 
 # Menu lateral
 st.sidebar.title('Cenário')
-paginaselecionada = st.sidebar.selectbox('Selecione o cenário',['Defina o cenário','Parque de Tanques','Tanques em Edificações','Fracionados','Operações','Cais ou Pier','Destilarias','Refinarias','Postos de Serviços','Plataforma de Carregamento'])
+paginaselecionada = st.sidebar.selectbox('Selecione o cenário',['Defina o cenário','Parque de Tanques','Tanques em Edificações','Fracionados','Operações','Cais ou Pier','Destilarias','Refinarias','Postos de Serviços','Hangares','Plataforma de Carregamento'])
 st.sidebar.caption('Aplicativo desenvolvido em Python pelo Professor Silmar Sendin.')
+st.sidebar.write('Voltar ao site do Professor','http://www.silmarsendin.com')
 # Fim do Menu Lateral
 
 if paginaselecionada == 'Defina o cenário':
@@ -260,3 +262,120 @@ elif paginaselecionada == 'Destilarias':
             st.write('As destilarias dos tipos 3, onde a altura dos equipamentos for maior que 9 m, devem ser protegidas por no mínimo um canhão monitor com vazão mínima de 3.800 lpm, podendo ser dividido em dois canhões com vazão mínima de 1.600 lpm cada um.')
             st.write('Deve ser previsto sistema de resfriamento por aspersores nas destilarias dos tipos 2, quando os equipamentos ultrapassarem a altura de alcance dos canhões monitores, conforme rendimento real destes')
             st.write('O sistema de aspersor deve ser projetado para resfriar vasos e equipamentos com líquidos inflamáveis ou combustíveis e para proteger a estrutura da edificação e das sustentações dos vasos e equipamentos contra exposição ao calor, sendo dimensionado conforme Norma Brasileira aplicável ou, na inexistência desta, conforme NFPA 15.')
+#Exigências para Refinarias.
+elif paginaselecionada == 'Refinarias':
+    st.title('Refinarias')
+    st.write('O cenário selecionado é para Refinarias e as informações a seguir só se aplicam a este cenário.')
+    mostrarit25 = st.checkbox('Quero saber como proteger o cenário de acordo com a IT 25/19.')
+    if mostrarit25:
+        st.subheader('Sistema de Espuma')
+        st.write('É obrigatório o sistema de espuma para proteção de todas as áreas onde seja possível o derrame ou vazamento de líquidos combustíveis ou inflamáveis, ou onde esses líquidos já estejam normalmente expostos à atmosfera.')
+        st.write('É obrigatório o emprego de sistema de lançamento de espuma em áreas sujeitas a derramamento de hidrocarbone-tos com possibilidade de incêndio, tais como unidades de processamento, parques de bombas e braços de carregamento ou em áreas com superfície livre exposta, tais como, separadores de água e óleo e caixas coletoras.')
+        st.write('Nesses casos, a vazão de projeto de solução de espuma deve ser calculada para no mínimo 6,5 L/min/m2 da área delimitada pela drenagem, não podendo ser inferior a 200 lpm e deve ser lançada de duas direções distintas e alimentação independentemente, cada uma com esta vazão, sem simultaneidade de aplicação.')
+        st.write('Quando o sistema de geração de espuma for fixo, devem ser previstos, pelo menos, dois hidrantes duplos para aplicação de espuma por meio de linhas manuais ou canhão monitor.')
+        st.write('O tempo de aplicação de espuma deve ser de no mínimo 65 min.')
+        st.subheader('Sistema de Resfriamento')
+        st.write('Uma unidade de processo em refinarias deve ser protegida por meio de linhas manuais e canhões-monitores.')
+        st.write('A vazão do sistema deve ser determinada em função da área definida pelo limite da unidade de processo, multiplicada pela taxa de 3,0 L/min/m2, devendo-se adotar como vazão mínima 3.800 lpm e como vazão máxima 20.000 lpm.')
+        st.write('O suprimento de água deve ser baseado em fonte inesgotável (mar, rio ou lago), o qual deve ser capaz de de-manda de 100% da vazão do projeto em qualquer época do ano ou condição climática. Na inviabilidade desta solução, deve ser previsto um reservatário com capacidade para atender a demanda de 100% da vazão do projeto durante 6 h.')
+
+#Exigências para Postos de Serviços.
+elif paginaselecionada == 'Postos de Serviços':
+    st.title('Postos de Serviços')
+    st.write('O cenário selecionado é para Postos de Serviços e as informações a seguir só se aplicam a este cenário.')
+    mostrarit25 = st.checkbox('Quero saber como proteger o cenário de acordo com a IT 25/19.')
+    if mostrarit25:
+        st.write('Nos postos de serviços para veículos motorizados, os tanques devem obrigatoriamente ser instalados no pavimento térreo, no nível do solo ou enterrados.')
+        st.write('Não é requerido um “sistema fixo de proteção contra incêndio” para tanques subterrâneos.')
+        st.write('Tanques instalados no térreo ou no nível do solo devem atender às exigências para Parques de Tanques.')
+
+#Exigências para Hangares.
+elif paginaselecionada == 'Hangares':
+    st.title('Hangares')
+    st.write('O cenário selecionado é para Hangares e as informações a seguir só se aplicam a este cenário.')
+    mostrarit25 = st.checkbox('Quero saber como proteger o cenário de acordo com a IT 25/19.')
+    if mostrarit25:
+        areahangar = st.selectbox('Qual a área do Hangar:',['Até 2000 m2','Entre 2001 e 5000 m2','Acima de 5000 m2'])
+        if areahangar == 'Até 2000 m2':
+            st.subheader('Sistema de Espuma')
+            st.write('Hangares com até 2.000 m2 de área construída estão isentos de proteção por espuma.')
+            st.subheader('Sistema de Resfriamento')
+            st.write('Não há exigência de Resfriamento para Hangares.')
+            st.subheader('Sistema de Extintores')
+            st.write('Os Hangares devem ser protegidos por extintores portáteis e sobre rodas, atendendo a Tabela 1.2 da Instrução Técnica 25.')
+            
+        elif areahangar == 'Entre 2001 e 5000 m2':
+            st.subheader('Sistema de Espuma')
+            st.write('Para hangar com área até 5.000 m2, além do sistema de hidrantes, deve ser prevista linha manual de espuma com vazão mínima de 200 lpm e reserva de incêndio para 30 minutos de operaçõo.')
+            st.subheader('Sistema de Resfriamento')
+            st.write('Não há exigência de Resfriamento para Hangares.')
+            st.subheader('Sistema de Extintores')
+            st.write('Os Hangares devem ser protegidos por extintores portáteis e sobre rodas, atendendo a Tabela 1.2 da Instrução Técnica 25.')
+
+        elif areahangar == 'Acima de 5000 m2':
+            st.subheader('Sistema de Espuma')
+            st.write('Para hangar com área superior a 5.000 m2, além das proteções por linhas manuais, também deverá ser prevista proteção por meio de chuveiros automáticos de espuma do tipo dilúvio, com taxa mínima de aplicação de 6,5 L/min/m2 com tempo de operação de 15 minutos, podendo ser setorizado ou proteção por meio de sistema de espuma de alta expansão, dimensionado conforme exigências da NFPA 409, sendo que nesse caso, a proposta deverá ser apresentada por meio de Comissão Técnica.')
+            st.write('Quando o sistema de chuveiros automáticos de espuma do tipo dilúvio for acionado automaticamente, deverá ser interligado ao sistema de detecção automática de incêndio.')
+            st.write('Hangares com mais de 5000 m2 devem possuir Gerenciamento de Risco de acordo com o item 5.9 da Instrução Técnica 25/19.')
+            st.subheader('Sistema de Resfriamento')
+            st.write('Não há exigência de Resfriamento para Hangares.')
+            st.subheader('Sistema de Extintores')
+            st.write('Os Hangares devem ser protegidos por extintores portáteis e sobre rodas, atendendo a Tabela 1.2 da Instrução Técnica 25.')
+
+#Exigências para Plataformas de Carregamento.
+elif paginaselecionada == 'Plataforma de Carregamento':
+    st.title('Plataforma de Carregamento')
+    st.write('O cenário selecionado é para Plataforma de Carregamento e as informações a seguir só se aplicam a este cenário.')
+    mostrarit25 = st.checkbox('Quero saber como proteger o cenário de acordo com a IT 25/19.')
+    if mostrarit25:
+        capaplata = st.selectbox('Qual a capacidade da Plataforma:',['1 caminhão/vagão tanque','2 caminhões/vagões tanque','Acima de 2 caminhões/vagões tanque'])
+        if capaplata == '1 caminhão/vagão tanque':
+            st.subheader('Sistema de Espuma')
+            st.write('Este cenário é isento de proteção por espuma conforme Tabela 7.12 da Instrução Técnica 25.')
+            st.subheader('Sistema de Resfriamento')
+            st.write('Não há exigência de Resfriamento para Plataformas de carregamento com capacidade para apenas um caminhão.')
+            st.subheader('Sistema de Extintores')
+            st.write('As Plataformas devem ser protegidos por extintores portáteis e sobre rodas, atendendo a Tabela 1.2 da Instrução Técnica 25.')
+            
+        elif capaplata == '2 caminhões/vagões tanque':
+            st.subheader('Sistema de Espuma')
+            st.write('Este cenário deve possuir sistema de espuma aplicada por linhas manuais, canhões monitores ou aspersores conforme Tabela 7.12 da Instrução Técnica 25.')
+            st.write('O projeto do sistema de proteção por aspersores de espuma deve atender aos requisitos da Norma Brasileira aplicável ou, na inexistência desta, da NFPA 16.')
+            st.write('Quando utilizados, deve haver pelo menos dois canhões-monitores posicionados de tal forma que o lançamento seja de duas posições distintas.')
+            st.write('Quando utilizados, deve haver pelo menos duas linhas manuais posicionadas de tal forma que o lançamento seja de duas posições distintas.')
+            st.write('A taxa e o tempo de aplicação de solução de espuma para a proteção da área devem ser conforme a Tabela 7.8. da Instrução Técnica 25.')
+            st.write('A área a ser considerada para o cálculo da vazão de espuma deve ser aquela que abranja toda a região onde ocorra a operação de carga e descarga de caminhões ou vagões-tanques, isto é, braços de carregamento, medido-res e todos os equipamentos associados com a operação de carga e descarga de líquidos inflamáveis e combustíveis.')
+            st.write('Como referência para o dimensionamento de proteção por espuma, deve ser considerada a área circunscrita pelo sistema de contenção adotado.')
+            st.write('No caso de plataformas operando a carga e descarga de vagões-tanques, a área a ser protegida deve contemplar aquelas ocupadas pelos vagões anterior e poste-rior ao que estiver em operação.')
+            mostrartab78 = st.checkbox('Quero ver a Tabela 7.8 da IT 25/19.')
+            if mostrartab78:
+                from PIL import Image
+                image = Image.open('tabela78.png')
+                st.image(image, caption='Tabela 7.8 - Taxas de aplicação de espuma e tempos para áreas de carregamento e descarregamento de caminhões-tanques e/ou vagões-tanques')
+            st.subheader('Sistema de Resfriamento')
+            st.write('Quando for exigida proteção por espuma nas plataformas de carregamento e descarregamento, estas devem ser igualmente protegidas por sistema de resfriamento por linhas manuais ou canhões-monitores.')
+            st.write('Sempre que houver proteção por aspersores, estes deverão ser obrigatoriamente de espuma, sendo previsto o sistema de resfriamento por linhas manuais ou canhões monitores.')
+            st.write('Cada ponto da plataforma deve ser coberto por no mínimo duas linhas manuais ou canhões monitores.')
+            st.write('Para efeito de cálculo devem ser consideradas apenas duas linhas manuais ou canhões-monitores em operação com vazão mínima de 400 lpm, por 60 min, cada.')
+            st.subheader('Sistema de Extintores')
+            st.write('As Plataformas devem ser protegidos por extintores portáteis e sobre rodas, atendendo a Tabela 1.2 da Instrução Técnica 25.')
+
+        elif capaplata == 'Acima de 2 caminhões/vagões tanque':
+            st.subheader('Sistema de Espuma')
+            st.write('Este cenário deve possuir sistema de espuma aplicada por aspersores conforme Tabela 7.12 da Instrução Técnica 25.')
+            st.write('O projeto do sistema de proteção por aspersores de espuma deve atender aos requisitos da Norma Brasileira aplicável ou, na inexistência desta, da NFPA 16.')
+            st.write('A área a ser considerada para o cálculo da vazão de espuma deve ser aquela que abranja toda a região onde ocorra a operação de carga e descarga de caminhões ou vagões-tanques, isto é, braços de carregamento, medido-res e todos os equipamentos associados com a operação de carga e descarga de líquidos inflamáveis e combustíveis.')
+            st.write('Como referência para o dimensionamento de proteção por espuma, deve ser considerada a área circunscrita pelo sistema de contenção adotado.')
+            st.write('No caso de plataformas operando a carga e descarga de vagões-tanques, a área a ser protegida deve contemplar aquelas ocupadas pelos vagões anterior e poste-rior ao que estiver em operação.')
+            mostrartab78 = st.checkbox('Quero ver a Tabela 7.8 da IT 25/19.')
+            if mostrartab78:
+                from PIL import Image
+                image = Image.open('tabela78.png')
+                st.image(image, caption='Tabela 7.8 - Taxas de aplicação de espuma e tempos para áreas de carregamento e descarregamento de caminhões-tanques e/ou vagões-tanques')
+            st.subheader('Sistema de Resfriamento')
+            st.write('Quando for exigida proteção por espuma nas plataformas de carregamento e descarregamento, estas devem ser igualmente protegidas por sistema de resfriamento por linhas manuais ou canhões-monitores.')
+            st.write('Sempre que houver proteção por aspersores, estes deverão ser obrigatoriamente de espuma, sendo previsto o sistema de resfriamento por linhas manuais ou canhões monitores.')
+            st.write('Cada ponto da plataforma deve ser coberto por no mínimo duas linhas manuais ou canhões monitores.')
+            st.write('Para efeito de cálculo devem ser consideradas apenas duas linhas manuais ou canhões-monitores em operação com vazão mínima de 400 lpm, por 60 min, cada.')
+            st.subheader('Sistema de Extintores')
+            st.write('As Plataformas devem ser protegidos por extintores portáteis e sobre rodas, atendendo a Tabela 1.2 da Instrução Técnica 25.')
